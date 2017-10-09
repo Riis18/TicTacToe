@@ -11,7 +11,7 @@ package tictactoe.bll;
  */
 public class GameBoard implements IGameModel
 {
-
+HEJ MED DIG
     /**
      * Returns 0 for player 0, 1 for player 1.
      *
