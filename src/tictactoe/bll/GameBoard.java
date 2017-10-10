@@ -16,6 +16,8 @@ public class GameBoard implements IGameModel
     int rows = 3, cols = 3;
     int[][] gameBoard = new int[rows][cols];
     
+    
+    
     public GameBoard()
     {
         newGame();
@@ -60,7 +62,7 @@ public class GameBoard implements IGameModel
 
     public boolean isGameOver()
     {
-        if(getWinnerVertically())
+        if(getWinnerVertically() || getWinnerHorizontally()||getWinnerDiagonally())
         {
             return true;
         }
@@ -76,7 +78,7 @@ public class GameBoard implements IGameModel
      */
     public int getWinner()
     {       
-     if(getWinnerVertically())
+     if(getWinnerVertically()||getWinnerHorizontally()||getWinnerDiagonally())
      {
          return currentPlayer;
      }
@@ -94,6 +96,29 @@ public class GameBoard implements IGameModel
                 return false;
     }
     
+    public boolean getWinnerHorizontally()
+    {
+             for (int row=0; row < gameBoard.length; row++)
+        {
+            if (gameBoard[row][0] == currentPlayer && gameBoard[row][1] == currentPlayer && gameBoard[row][2] == currentPlayer)
+                return true;
+        }
+                return false;
+    }
+    
+    public boolean getWinnerDiagonally()
+            
+    {
+             for (int row=0; row < gameBoard.length; row++)
+        {
+            if (gameBoard[0][0] == currentPlayer && gameBoard[1][1] == currentPlayer && gameBoard[2][2] == currentPlayer)
+                return true;
+        }
+             if (gameBoard[2][0] == currentPlayer && gameBoard[1][1] == currentPlayer && gameBoard[0][2] == currentPlayer)
+                return true;
+             
+             else return false;
+    }
    
     /**
      * Resets the game to a new game state.
