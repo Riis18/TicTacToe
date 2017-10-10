@@ -18,7 +18,7 @@ public class GameBoard implements IGameModel
     
     public GameBoard()
     {
-        currentPlayer = startPlayer;
+        newGame();
     }
     /**
      * Returns 0 for player 0, 1 for player 1.
@@ -43,6 +43,8 @@ public class GameBoard implements IGameModel
      */
     public boolean play(int col, int row)
     {
+        gameBoard[row][col] = currentPlayer;
+        
         if(currentPlayer == 0)
         {
             currentPlayer = 1;
@@ -51,13 +53,18 @@ public class GameBoard implements IGameModel
         {
             currentPlayer = 0;
         }
-        System.out.println(currentPlayer);
+        
         //TODO Implement this method
         return true;
     }
 
     public boolean isGameOver()
     {
+        if(getWinnerVertically())
+        {
+            return true;
+        }
+            
         //TODO Implement this method
         return false;
     }
@@ -68,16 +75,40 @@ public class GameBoard implements IGameModel
      * @return int id of winner, or -1 if draw.
      */
     public int getWinner()
-    {
+    {       
+     if(getWinnerVertically())
+     {
+         return currentPlayer;
+     }
         //TODO Implement this method
         return -1;
     }
-
+    
+    public boolean getWinnerVertically()
+    {
+                for (int col=0; col < gameBoard.length; col++)
+        {
+            if (gameBoard[0][col] == currentPlayer && gameBoard[1][col] == currentPlayer && gameBoard[2][col] == currentPlayer)
+                return true;
+        }
+                return false;
+    }
+    
+   
     /**
      * Resets the game to a new game state.
      */
     public void newGame()
     {
+        currentPlayer = startPlayer;
+        
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++)
+            {
+                gameBoard[row][col] = 3;
+            }
+            
+        }
         //TODO Implement this method
     }
 
