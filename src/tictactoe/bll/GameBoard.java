@@ -11,7 +11,15 @@ package tictactoe.bll;
  */
 public class GameBoard implements IGameModel
 {
-HEJ MED DIG
+    private int startPlayer = 0;
+    private int currentPlayer;
+    int rows = 3, cols = 3;
+    int[][] gameBoard = new int[rows][cols];
+    
+    public GameBoard()
+    {
+        currentPlayer = startPlayer;
+    }
     /**
      * Returns 0 for player 0, 1 for player 1.
      *
@@ -19,8 +27,8 @@ HEJ MED DIG
      */
     public int getNextPlayer()
     {
-        //TODO Implement this method
-        return 0;
+       return currentPlayer;
+       
     }
 
     /**
@@ -35,6 +43,15 @@ HEJ MED DIG
      */
     public boolean play(int col, int row)
     {
+        if(currentPlayer == 0)
+        {
+            currentPlayer = 1;
+        }
+        else if(currentPlayer == 1)
+        {
+            currentPlayer = 0;
+        }
+        System.out.println(currentPlayer);
         //TODO Implement this method
         return true;
     }
