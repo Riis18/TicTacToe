@@ -12,7 +12,7 @@ package tictactoe.bll;
 public class GameBoard implements IGameModel
 {
     private int startPlayer = 0;
-    private int currentPlayer;
+    private int currentPlayer;  
     int rows = 3, cols = 3;
     int[][] gameBoard = new int[rows][cols];
     
@@ -47,11 +47,11 @@ public class GameBoard implements IGameModel
     {
         gameBoard[row][col] = currentPlayer;
         
-        if(currentPlayer == 0)
+        if(currentPlayer == 0 && isGameOver() == false)
         {
             currentPlayer = 1;
         }
-        else if(currentPlayer == 1)
+        else if(currentPlayer == 1 && isGameOver() == false)
         {
             currentPlayer = 0;
         }
@@ -88,7 +88,7 @@ public class GameBoard implements IGameModel
     
     public boolean getWinnerVertically()
     {
-                for (int col=0; col < gameBoard.length; col++)
+        for (int col=0; col < gameBoard.length; col++)
         {
             if (gameBoard[0][col] == currentPlayer && gameBoard[1][col] == currentPlayer && gameBoard[2][col] == currentPlayer)
                 return true;
@@ -98,7 +98,7 @@ public class GameBoard implements IGameModel
     
     public boolean getWinnerHorizontally()
     {
-             for (int row=0; row < gameBoard.length; row++)
+        for (int row=0; row < gameBoard.length; row++)
         {
             if (gameBoard[row][0] == currentPlayer && gameBoard[row][1] == currentPlayer && gameBoard[row][2] == currentPlayer)
                 return true;
@@ -109,7 +109,7 @@ public class GameBoard implements IGameModel
     public boolean getWinnerDiagonally()
             
     {
-             for (int row=0; row < gameBoard.length; row++)
+        for (int row=0; row < gameBoard.length; row++)
         {
             if (gameBoard[0][0] == currentPlayer && gameBoard[1][1] == currentPlayer && gameBoard[2][2] == currentPlayer)
                 return true;

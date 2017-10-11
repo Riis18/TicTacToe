@@ -35,6 +35,7 @@ public class TicTacViewController implements Initializable
     
     private static final String TXT_PLAYER = "Player: ";
     private IGameModel game;
+    private GameBoard gameBoard;
 
     @FXML
     private void handleButtonAction(ActionEvent event)
@@ -48,23 +49,26 @@ public class TicTacViewController implements Initializable
             int player = game.getNextPlayer();
             if (game.play(c, r))
             {
-                if (game.isGameOver())
-                {
-                    int winner = game.getWinner();
-                    displayWinner(winner);
-                }
-                else
-                {
+                
                     Button btn = (Button) event.getSource();
                     String xOrO = player == 0 ? "X" : "O";
                     btn.setText(xOrO);
                     setPlayer();
-                }
+                
+                    
             }
         } catch (Exception e)
         {
             System.out.println(e.getMessage());
         }
+        
+        if (game.isGameOver())
+        {
+           int winner = game.getWinner(); 
+           displayWinner(winner);
+        }
+        
+        
     }
 
     @FXML
