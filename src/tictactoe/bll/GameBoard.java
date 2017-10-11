@@ -12,10 +12,13 @@ package tictactoe.bll;
     public class GameBoard implements IGameModel
     {
         private int startPlayer = 0;
-        private int currentPlayer;  
+        private int fieldId = 3;
+        private int player0 = 0;
+        private int player1 = 1;
+        private int currentPlayer;
+        private int fieldsPlayed = 0;
         int rows = 3, cols = 3;
         int[][] gameBoard = new int[rows][cols];
-        private int fieldsPlayed = 0;
         private boolean isPlayable;
 
 
@@ -48,7 +51,7 @@ package tictactoe.bll;
          */
         public boolean play(int col, int row )
         {
-            if(gameBoard[row][col] != 3 || isGameOver())
+            if(gameBoard[row][col] != fieldId || isGameOver())
             {
                 isPlayable = false;
             }
@@ -59,13 +62,13 @@ package tictactoe.bll;
 
                 gameBoard[row][col] = currentPlayer;
 
-            if(currentPlayer == 0 && isGameOver() == false)
+            if(currentPlayer == player0 && isGameOver() == false)
             {
-                 currentPlayer = 1;
+                 currentPlayer = player1;
             }
-            else if(currentPlayer == 1 && isGameOver() == false)
+            else if(currentPlayer == player1 && isGameOver() == false)
             {
-                currentPlayer = 0;
+                currentPlayer = player0;
             }
             fieldsPlayed++;
             }
@@ -145,7 +148,7 @@ package tictactoe.bll;
             for (int row = 0; row < rows; row++) {
                 for (int col = 0; col < cols; col++)
                 {
-                    gameBoard[row][col] = 3;
+                    gameBoard[row][col] = fieldId;
                 }
 
             }
