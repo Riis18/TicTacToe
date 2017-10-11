@@ -15,12 +15,13 @@ public class GameBoard implements IGameModel
     private int currentPlayer;  
     int rows = 3, cols = 3;
     int[][] gameBoard = new int[rows][cols];
-    
+    private int fieldsPlayed = 0;
     
     
     public GameBoard()
     {
         newGame();
+    
     }
     /**
      * Returns 0 for player 0, 1 for player 1.
@@ -32,6 +33,7 @@ public class GameBoard implements IGameModel
        return currentPlayer;
        
     }
+    
 
     /**
      * Attempts to let the current player play at the given coordinates. It the
@@ -55,14 +57,14 @@ public class GameBoard implements IGameModel
         {
             currentPlayer = 0;
         }
-        
+        fieldsPlayed++;
         //TODO Implement this method
         return true;
     }
 
     public boolean isGameOver()
     {
-        if(getWinnerVertically() || getWinnerHorizontally()||getWinnerDiagonally())
+        if(getWinnerVertically() || getWinnerHorizontally()||getWinnerDiagonally()||fieldsPlayed == 9)
         {
             return true;
         }
@@ -78,14 +80,13 @@ public class GameBoard implements IGameModel
      */
     public int getWinner()
     {       
-     if(getWinnerVertically()||getWinnerHorizontally()||getWinnerDiagonally())
+     if(getWinnerDiagonally()||getWinnerVertically()||getWinnerHorizontally())
      {
          return currentPlayer;
      }
-        //TODO Implement this method
-        return -1;
+     
+     return -1;
     }
-    
     public boolean getWinnerVertically()
     {
         for (int col=0; col < gameBoard.length; col++)
@@ -126,6 +127,7 @@ public class GameBoard implements IGameModel
     public void newGame()
     {
         currentPlayer = startPlayer;
+        fieldsPlayed = 0;
         
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++)
