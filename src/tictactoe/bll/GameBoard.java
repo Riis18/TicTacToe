@@ -21,7 +21,7 @@ package tictactoe.bll;
         int[][] gameBoard = new int[rows][cols];
         private boolean isPlayable;
 
-
+        //Constructor for GameBoard class, initialize a new game
         public GameBoard()
         {
             newGame();
@@ -51,6 +51,9 @@ package tictactoe.bll;
          */
         public boolean play(int col, int row )
         {
+            
+            //Checks to see if the field is playable or not, and if the game is over
+            
             if(gameBoard[row][col] != fieldId || isGameOver())
             {
                 isPlayable = false;
@@ -61,7 +64,7 @@ package tictactoe.bll;
                 isPlayable = true;
 
                 gameBoard[row][col] = currentPlayer;
-
+            //switch between players
             if(currentPlayer == player0 && isGameOver() == false)
             {
                  currentPlayer = player1;
@@ -70,11 +73,16 @@ package tictactoe.bll;
             {
                 currentPlayer = player0;
             }
+            // Counts each play
             fieldsPlayed++;
             }
             return isPlayable;
         }
-
+        
+        /*
+        * Checks if there is a winner or it is a draw, returns true if there is
+        * a winner or draw.
+        */
         public boolean isGameOver()
         {
             if(getWinnerVertically() || getWinnerHorizontally()||getWinnerDiagonally()||fieldsPlayed == 9)
@@ -99,6 +107,9 @@ package tictactoe.bll;
 
          return -1;
         }
+        /*
+        * A loop to check each col to see if there is a winner
+        */
         public boolean getWinnerVertically()
         {
             for (int col=0; col < gameBoard.length; col++)
@@ -110,6 +121,9 @@ package tictactoe.bll;
                     return false;
         }
 
+        /*
+        * A loop to check each row to see if there is a winner
+        */
         public boolean getWinnerHorizontally()
         {
             for (int row=0; row < gameBoard.length; row++)
@@ -121,6 +135,9 @@ package tictactoe.bll;
                     return false;
         }
 
+        /*
+        * A loop to go through each diagonal to see if there is a winner
+        */
         public boolean getWinnerDiagonally()
 
         {
@@ -142,9 +159,11 @@ package tictactoe.bll;
          */
         public void newGame()
         {
+            // resets the player to player 0
             currentPlayer = startPlayer;
+            // resets the plays to 0
             fieldsPlayed = 0;
-
+            // A loop to go through each field and give it a ID
             for (int row = 0; row < rows; row++) {
                 for (int col = 0; col < cols; col++)
                 {
